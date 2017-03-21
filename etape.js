@@ -15,13 +15,27 @@ console.log("/fichier");
    fs.readFile('public/text/collection_provinces.json', 'utf8', function(err, contents) {
    	if(err)
    	{
-   		return console.log("Erreur lecture fichier")
+   		 console.log("Erreur lecture fichier")
+   		 return
    	}
    	res.end(contents)
     console.log(contents);
 });
 
 })
+
+app.get("/etape2", function(req,res){
+	   fs.readFile('public/text/collection_provinces.json', 'utf8', function(err, contents) {
+   	if(err)
+   	{
+   		 console.log("Erreur lecture fichier")
+   		 return
+   	}
+   	
+   	res.render('index.ejs', {provinces : JSON.parse(contents)})
+});
+
+})	   
 
 
 

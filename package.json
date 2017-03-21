@@ -11,7 +11,7 @@
     "Express",
     "MongoDB"
   ],
-  "author": "Eddy Martin",
+  "author": "Kevin Filion-Phillips",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
