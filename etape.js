@@ -10,9 +10,20 @@ app.use(express.static('public'))  // pour utiliser le dossier public
 app.use(bodyParser.json())  // pour traiter les données JSON
 
 
-app.get('/', function (req, res) {
-   res.send('Hello World');
+app.get('/fichier', function (req, res) {
+console.log("/fichier");
+   fs.readFile('public/text/collection_provinces.json', 'utf8', function(err, contents) {
+   	if(err)
+   	{
+   		return console.log("Erreur lecture fichier")
+   	}
+   	res.end(contents)
+    console.log(contents);
+});
+
 })
+
+
 
 var server = app.listen(8081, function () {
    var host = server.address().address
