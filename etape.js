@@ -8,6 +8,13 @@ app.set('view engine', 'ejs'); // générateur de template
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))  // pour utiliser le dossier public
 app.use(bodyParser.json())  // pour traiter les données JSON
+var db;
+MongoClient.connect('mongodb://127.0.0.1:27017/carnet-adresse', (err, database) => {
+  if (err) return console.log(err)
+  db = database
+  
+})
+
 
 
 app.get('/fichier', function (req, res) {
@@ -35,7 +42,24 @@ app.get("/etape2", function(req,res){
    	res.render('index.ejs', {provinces : JSON.parse(contents)})
 });
 
-})	   
+})	
+
+
+app.get('/etape3',  (req, res) => {
+   console.log('la route route get / = ' + req.url)
+    var cursor = db.collection('provinces').find().toArray(function(err, resultat){
+       if (err) return console.log(err)
+    // renders index.ejs
+    // affiche le contenu de la BD
+    res.render('index.ejs', {provinces: resultat})
+
+    
+    
+
+})
+
+})
+
 
 
 
